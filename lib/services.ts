@@ -5,6 +5,7 @@ import {
   generateObject,
   generateText
 } from 'ai';
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import {
   FormSchema,
   QualificationSchema,
@@ -14,6 +15,10 @@ import { sendSlackMessageWithButtons } from '@/lib/slack';
 import { z } from 'zod';
 import { exa } from '@/lib/exa';
 
+const openrouter = createOpenRouter({
+  apiKey: process.env.OPENROUTER_API_KEY
+});
+
 /**
  * Qualify the lead
  */
@@ -22,7 +27,7 @@ export async function qualify(
   research: string
 ): Promise<QualificationSchema> {
   const { object } = await generateObject({
-    model: 'openai/gpt-5',
+    model: openrouter('openai/gpt-5'),
     schema: qualificationSchema,
     prompt: `Qualify the lead and give a reason for the qualification based on the following information: LEAD DATA: ${JSON.stringify(
       lead
@@ -40,7 +45,7 @@ export async function writeEmail(
   qualification: QualificationSchema
 ) {
   const { text } = await generateText({
-    model: 'openai/gpt-5',
+    model: openrouter('openai/gpt-5'),
     prompt: `Write an email for a ${
       qualification.category
     } lead based on the following information: ${JSON.stringify(research)}`
@@ -195,8 +200,8 @@ const queryKnowledgeBase = tool({
  * This agent is used to research the lead and return a comprehensive report
  */
 export const researchAgent = new Agent({
-  model: 'openai/gpt-5',
-  system: `
+  model: openrouter('openai/gpt-5'),
+  instructions: `
   You are a researcher to find information about a lead. You are given a lead and you need to find information about the lead.
   
   You can use the tools provided to you to find information about the lead: 

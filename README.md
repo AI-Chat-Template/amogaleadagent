@@ -20,7 +20,7 @@ Lead agent app that captures a lead in a contact sales form and then kicks off a
 
 ## Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel-labs%2Flead-agent&env=AI_GATEWAY_API_KEY,SLACK_BOT_TOKEN,SLACK_SIGNING_SECRET,SLACK_CHANNEL_ID,EXA_API_KEY&project-name=lead-agent&repository-name=lead-agent)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel-labs%2Flead-agent&env=OPENROUTER_API_KEY,SLACK_BOT_TOKEN,SLACK_SIGNING_SECRET,SLACK_CHANNEL_ID,EXA_API_KEY&project-name=lead-agent&repository-name=lead-agent)
 
 ## Architecture
 
@@ -46,7 +46,7 @@ Send email (on approval)
 
 - **Framework**: [Next.js 16](https://nextjs.org)
 - **Durable execution**: [Workflow DevKit](http://useworkflow.dev/)
-- **AI**: [Vercel AI SDK](https://ai-sdk.dev/) with [AI Gateway](https://vercel.com/ai-gateway)
+- **AI**: [Vercel AI SDK](https://ai-sdk.dev/) with [OpenRouter](https://openrouter.ai/)
 - **Human-in-the-Loop**: [Slack Bolt + Vercel Slack Bolt adapter](https://vercel.com/templates/ai/slack-agent-template)
 - **Web Search**: [Exa.ai](https://exa.ai/)
 
@@ -75,7 +75,7 @@ Additionally, update prompts to meet the needs of your specific business functio
   - You can set the permissions and configuration for your Slack app in the `manifest.json` file in the root of this repo. Paste this manifest file into the Slack dashboard when creating the app
   - **Be sure to update the request URL for interactivity and event subscriptions to be your production domain URL**
   - If Slack environment variables are not set, the app will still run with the Slack bot disabled
-- [Vercel AI Gateway API Key](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%2Fapi-keys%3Futm_source%3Dai_gateway_landing_page&title=Get+an+API+Key)
+- [OpenRouter API key](https://openrouter.ai/settings/keys)
 - [Exa API key](https://exa.ai/)
 
 ### Installation
@@ -102,8 +102,8 @@ cp .env.example .env.local
 Configure the following variables:
 
 ```bash
-# Vercel AI Gateway API Key
-AI_GATEWAY_API_KEY
+# OpenRouter API Key
+OPENROUTER_API_KEY
 
 # Slack Bot
 SLACK_BOT_TOKEN
